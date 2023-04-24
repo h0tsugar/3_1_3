@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head>
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="logout"/>
+  </form>
+  <br>
+  <br>
+  <h1>USER UPDATE</h1>
+  <meta charset="utf-8" />
+  <title>USER UPDATE</title>
+</head>
+<body>
+<form th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
+  <input type="hidden" th:field="*{id}" />
+  <label for="firstname">firstname</label>
+  <input type="text" id="firstname" th:field="*{firstName}"  >
+  <label for="lastname">lastname</label>
+  <input type="text" id="lastname" th:field="*{lastName}" >
+  <label for="password">password</label>
+  <input type="text" id="password" th:field="*{password}" >
+  <label for="username">username</label>
+  <input type="text" id="username" th:field="*{username}" >
+  <label for="gender">gender</label>
+  <input type="text" id="gender" th:field="*{gender}" required>
+
+  <select class="form-control" id="roles" name="roles" >
+    <option th:each="role : ${listRoles}"
+            th:selected="${role.getRoleName()}"
+            th:value="${role.getId()}"
+            th:text="${role.getRoleName()}">Role name</option>
+  </select>
+    <input type="submit" value="update">
+
+
+</form>
+</body>
+</html>
